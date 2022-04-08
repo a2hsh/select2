@@ -36,7 +36,8 @@ define([
       .attr('id', id)
       .attr('role', 'textbox')
       .attr('aria-readonly', 'true');
-    this.$selection.attr('aria-labelledby', id);
+    this.$element.attr('aria-label') ? this.$selection.attr('aria-label', this.$element.attr('aria-label')) : this.$selection.attr('aria-labelledby', id);
+	this.$element.attr('aria-description') ? this.$selection.attr('aria-description', this.$element.attr('aria-description')) : this.$selection.attr('aria-description', this.options.get('translations').get('selectBoxAriaDescription')());
     this.$selection.attr('aria-controls', id);
 
     this.$selection.on('mousedown', function (evt) {
