@@ -48,6 +48,9 @@ define(function () {
     },
     search: function() {
       return 'Search';
+    },
+	selectBoxAriaDescription: function() {
+      return 'Use Alt+down arrow to expand the dropdown menu';
     }
   };
 });

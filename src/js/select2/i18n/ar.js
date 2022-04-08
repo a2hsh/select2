@@ -28,6 +28,9 @@ define(function () {
     },
      removeAllItems: function () {
       return 'قم بإزالة كل العناصر';
+    },
+	selectBoxAriaDescription: function() {
+      return 'اضغط على Alt+سهم لأسفل لفتح القائمة المنسدلة';
     }
   };
 });
