@@ -4,7 +4,7 @@ define([
   '../utils',
   '../keys'
 ], function ($, BaseSelection, Utils, KEYS) {
-  function SingleSelection () {
+  function SingleSelection() {
     SingleSelection.__super__.constructor.apply(this, arguments);
   }
 
@@ -18,7 +18,7 @@ define([
     $selection.html(
       '<span class="select2-selection__rendered"></span>' +
       '<span class="select2-selection__arrow" role="presentation">' +
-        '<b role="presentation"></b>' +
+      '<b role="presentation"></b>' +
       '</span>'
     );
 
@@ -36,8 +36,9 @@ define([
       .attr('id', id)
       .attr('role', 'textbox')
       .attr('aria-readonly', 'true');
-    this.$element.attr('aria-label') ? this.$selection.attr('aria-label', this.$element.attr('aria-label')) : this.$selection.attr('aria-labelledby', id);
-	this.$element.attr('aria-description') ? this.$selection.attr('aria-description', this.$element.attr('aria-description')) : this.$selection.attr('aria-description', this.options.get('translations').get('selectBoxAriaDescription')());
+    let srLabel = this.$element.attr('aria-label') || $(`label[for=${this.$element.attr('id')}]`).text();
+    srLabel ? this.$selection.attr('aria-label', srLabel) : this.$selection.attr('aria-labelledby', id);
+    this.$element.attr('aria-description') ? this.$selection.attr('aria-description', this.$element.attr('aria-description')) : this.$selection.attr('aria-description', this.options.get('translations').get('selectBoxAriaDescription')());
     this.$selection.attr('aria-controls', id);
 
     this.$selection.on('mousedown', function (evt) {
