@@ -1604,7 +1604,7 @@ S2.define('select2/selection/single',[
   '../utils',
   '../keys'
 ], function ($, BaseSelection, Utils, KEYS) {
-  function SingleSelection () {
+  function SingleSelection() {
     SingleSelection.__super__.constructor.apply(this, arguments);
   }
 
@@ -1618,7 +1618,7 @@ S2.define('select2/selection/single',[
     $selection.html(
       '<span class="select2-selection__rendered"></span>' +
       '<span class="select2-selection__arrow" role="presentation">' +
-        '<b role="presentation"></b>' +
+      '<b role="presentation"></b>' +
       '</span>'
     );
 
@@ -1636,7 +1636,9 @@ S2.define('select2/selection/single',[
       .attr('id', id)
       .attr('role', 'textbox')
       .attr('aria-readonly', 'true');
-    this.$selection.attr('aria-labelledby', id);
+    let srLabel = this.$element.attr('aria-label') || $(`label[for=${this.$element.attr('id')}]`).text();
+    srLabel ? this.$selection.attr('aria-label', srLabel) : this.$selection.attr('aria-labelledby', id);
+    this.$element.attr('aria-description') ? this.$selection.attr('aria-description', this.$element.attr('aria-description')) : this.$selection.attr('aria-description', this.options.get('translations').get('selectBoxAriaDescription')());
     this.$selection.attr('aria-controls', id);
 
     this.$selection.on('mousedown', function (evt) {
@@ -3751,7 +3753,7 @@ S2.define('select2/data/ajax',[
       }, function () {
         // Attempt to detect if a request was aborted
         // Only works if the transport exposes a status property
-        if ('status' in $request &&
+        if ($request && 'status' in $request &&
             ($request.status === 0 || $request.status === '0')) {
           return;
         }
@@ -4936,6 +4938,9 @@ S2.define('select2/i18n/en',[],function () {
     },
     search: function() {
       return 'Search';
+    },
+	selectBoxAriaDescription: function() {
+      return 'Use Alt+down arrow to expand the dropdown menu';
     }
   };
 });
@@ -6429,7 +6434,7 @@ S2.define('select2/selection/stopPropagation',[
     }
 
     function shouldAdjustOldDeltas(orgEvent, absDelta) {
-        // If this is an older event and the delta is divisible by 120,
+        // If this is an older event and the delta is divisable by 120,
         // then we are assuming that the browser is treating this as an
         // older mouse wheel event and that we should divide the deltas
         // by 40 to try and get a more usable deltaFactor.
