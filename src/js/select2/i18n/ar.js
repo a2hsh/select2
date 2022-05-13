@@ -26,10 +26,13 @@ define(function () {
     searching: function () {
       return 'جاري البحث…';
     },
-     removeAllItems: function () {
+    removeAllItems: function () {
       return 'قم بإزالة كل العناصر';
     },
-	selectBoxAriaDescription: function() {
+    search: function () {
+      return 'بحث';
+    },
+    selectBoxAriaDescription: function () {
       return 'اضغط على Alt+سهم لأسفل لفتح القائمة المنسدلة';
     }
   };
