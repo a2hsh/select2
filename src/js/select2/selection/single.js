@@ -36,8 +36,12 @@ define([
       .attr('id', id)
       .attr('role', 'textbox')
       .attr('aria-readonly', 'true');
-    let srLabel = this.$element.attr('aria-label') || $(`label[for=${this.$element.attr('id')}]`).text();
-    srLabel ? this.$selection.attr('aria-label', srLabel) : this.$selection.attr('aria-labelledby', id);
+    var srLabel = this.$element.attr('aria-label') || $('label[for="' + this.$element.attr("id") + '"]').text();
+    if (srLabel) {
+      this.$selection.attr('aria-label', srLabel)
+    } else {
+      this.$selection.attr('aria-labelledby', id);
+    }
     this.$element.attr('aria-description') ? this.$selection.attr('aria-description', this.$element.attr('aria-description')) : this.$selection.attr('aria-description', this.options.get('translations').get('selectBoxAriaDescription')());
     this.$selection.attr('aria-controls', id);
 
